@@ -1,0 +1,53 @@
+databaseChangeLog:
+  - changeSet:
+      id: init-table
+      author: ediet
+      changes:
+        - createTable:
+            tableName: temperature
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: timestamp
+                  type: "timestamp with time zone"
+              - column:
+                  name: value
+                  type: real
+              - column:
+                  name: sender
+                  type: text
+        - createTable:
+            tableName: soil
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: conduct_soil
+                  type: integer
+              - column:
+                  name: temp_soil
+                  type: real
+              - column:
+                  name: soil_moisture
+                  type: real
+              - column:
+                  name: timestamp
+                  type: "timestamp with time zone"
+        - createIndex:
+            indexName: idx_soil_timestamp
+            tableName: soil
+            columns:
+              - column:
+                  name: timestamp
+            unique: false

@@ -1,0 +1,10 @@
+version: "3.6"
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: iot
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: iot
+    ports:
+      - "5432:5432"

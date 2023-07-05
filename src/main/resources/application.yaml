@@ -1,0 +1,59 @@
+# actuator/info
+info:
+  project:
+    artifactId: iot
+    name: iot
+
+server:
+  port : 8080
+
+# spring doc
+springdoc:
+  packagesToScan: dproject.iot.controller
+  pathsToMatch: /api/v1/**
+  swagger-ui:
+    path: /swagger-ui.html
+
+
+# SPRING
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    database: POSTGRESQL
+    show-sql: false
+    properties:
+      hibernate.id.new_generator_mappings: true
+      hibernate.connection.provider_disables_autocommit: false
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: falses
+      hibernate.use_sql_comments: true
+      hibernate.format_sql: false
+  liquibase:
+    contexts: none
+    enabled: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/iot
+    username: iot
+    password: password
+
+# HTTP client
+feign:
+  client:
+    lorawan:
+      url: https://eu1.cloud.thethings.network/api/v3/as/applications/soulmbengue-app-lorawansrv-1/packages/storage/uplink_message
+
+
+api-properties:
+  cron:
+    lorawan: "0 0/30 * * * ?" #every 30 ms
+  mqtt:
+    topic: "emqx/esp32-KebabKebab70"
+    broker : "tcp://test.mosquitto.org:1883"
+    client : "IOT-CL"
+  esp32:
+    tempFreq: 10
+    connectionConfig: 2
+    connectionFreq: 30
